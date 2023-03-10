@@ -1,0 +1,102 @@
+type Query {
+  users: [User]
+  user(id: String!): User!
+  addresses: [Address]
+  address(id: String!): Address!
+  listings: [Listing]
+  listing(id: String!): Listing!
+  transactions: [Transaction]
+  transaction(id: String!): Transaction!
+}
+
+type User {
+  id: String!
+  name: String!
+  email: String!
+  createdAt: String
+  updatedAt: String
+}
+
+type Address {
+  id: String!
+  address1: String!
+  address2: String
+  state: String!
+  zipcode: String!
+  listings: [Listing!]!
+  createdAt: String
+  updatedAt: String
+}
+
+type Listing {
+  id: String!
+  title: String!
+  description: String
+  price: Int!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Transaction {
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input UserInput {
+  name: String!
+  email: String!
+}
+
+input UserUpdateInput {
+  name: String
+  email: String
+}
+
+input AddressInput {
+  address1: String!
+  address2: String
+  state: String!
+  zipcode: String!
+}
+
+input AddressUpdateInput {
+  address1: String
+  address2: String
+  state: String
+  zipcode: String
+}
+
+input ListingInput {
+  title: String!
+  description: String
+  price: Int!
+  address: AddressInput
+}
+
+input ListingUpdateInput {
+  title: String
+  description: String
+  price: Int
+  address: AddressInput
+}
+
+input TransactionInput {
+  createdAt: String
+  updatedAt: String
+}
+
+type Mutation {
+  createUser(input: UserInput): User
+  updateUser(id: ID!, input: UserUpdateInput): User
+  deleteUser(id: ID!): User
+  createAddress(input: AddressInput): Address
+  updateAddress(id: ID!, input: AddressUpdateInput): Address
+  deleteAddress(id: ID!): User!
+  createListing(input: ListingInput): Listing
+  updateListing(id: ID!, input: ListingUpdateInput): Listing
+  deleteListing(id: ID!): Listing
+  createTransaction(id: ID): Transaction
+  updateTransaction(update: TransactionInput): Transaction
+  deleteTransaction(id: ID!): Transaction
+}
